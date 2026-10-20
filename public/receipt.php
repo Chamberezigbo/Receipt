@@ -14,7 +14,7 @@ $r = ReceiptData::fromRequest($_POST, $banks);
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Receipt <?= htmlspecialchars($r->reference) ?></title>
-<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(__DIR__ . '/assets/css/base.css') ?>">
 </head><body class="receipt-page">
 <div class="toolbar no-print">
     <button class="primary" onclick="window.print()">🖨 Print</button>

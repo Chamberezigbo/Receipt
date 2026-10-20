@@ -66,7 +66,7 @@ $e = function ($s) { return htmlspecialchars((string)$s); };
 ?>
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Users</title><link rel="stylesheet" href="../assets/css/base.css"></head><body>
+<title>Users</title><link rel="stylesheet" href="../assets/css/base.css?v=<?= filemtime(__DIR__ . '/../assets/css/base.css') ?>"></head><body>
 <?php include __DIR__ . '/../../templates/partials/nav.php'; ?>
 <?php $activeCount = count(array_filter($users, function ($u) { return (int)$u['active']; })); ?>
 <main class="page">

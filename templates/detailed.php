@@ -16,7 +16,7 @@ $words = function ($n) use (&$words) {
     return '';
 };
 ?>
-<div class="receipt detailed <?= $r->bankId === 'kudos' ? 'kuda ' : '' ?><?= $r->bankId === 'opaylite' ? 'opay ' : '' ?><?= $r->bankId === 'moniepoint' ? 'monie ' : '' ?><?= $e($variant ?? '') ?>" style="--brand: <?= $e($r->color) ?>">
+<div class="receipt detailed <?= $r->bankId === 'kudos' ? 'kuda ' : '' ?><?= $r->bankId === 'opaylite' ? 'opay ' : '' ?><?= $r->bankId === 'palmwave' ? 'palm ' : '' ?><?= $r->bankId === 'unity' ? 'uba ' : '' ?><?= $r->bankId === 'moniepoint' ? 'monie ' : '' ?><?= $e($variant ?? '') ?>" style="--brand: <?= $e($r->color) ?>">
     <?php if ($r->bankId === 'kudos'): ?>
     <img class="d-head-img" src="assets/img/kuda-header.png" alt="Kuda - Transaction Details">
     <?php elseif ($r->bankId === 'opaylite'): ?>
@@ -37,18 +37,50 @@ $words = function ($n) use (&$words) {
     <img class="a-head" src="assets/img/access-header.png" alt="Access - more than banking">
     <?php elseif ($r->bankId === 'zenor'): ?>
     <div class="z-head">
-        <b><?= $isDeposit ? 'Deposit' : 'Transfer' ?> Receipt</b>
-        <img src="assets/img/zenith-logo.png" alt="Zenith Bank" height="30">
+        <b><?= $isDeposit ? 'DEPOSIT' : 'TRANSACTION' ?> RECEIPT</b>
+        <span class="z-logo">
+            <svg viewBox="140 108 140 138" aria-hidden="true"><defs><linearGradient id="zg" gradientUnits="userSpaceOnUse" x1="0" y1="168" x2="0" y2="176"><stop offset="0" stop-color="#707070"/><stop offset="1" stop-color="#e2231a"/></linearGradient></defs><path fill="url(#zg)" d="M158 118H272V140L205 212H272V235H148V212L215 141H158Z"/></svg>
+            <i>ZENITH</i>
+        </span>
     </div>
+    <div class="zn-bar"><?= date('l, F d, Y', $ts) ?></div>
     <?php elseif ($r->bankId === 'unity'): ?>
-    <div class="u-head">
-        <div class="u-bar"><span aria-hidden="true">&#8249;</span><b>Transaction receipt</b></div>
-        <img src="assets/img/uba-avatar.png" alt="" height="64">
-        <p class="u-ok"><?= $isDeposit ? 'Deposit' : 'Transfer' ?> successful</p>
-        <h3><?= $isDeposit ? 'From' : 'To' ?> <?= $e($r->name) ?></h3>
+    <div class="u-banner">
+        <svg class="u-art" viewBox="0 0 605 251" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <radialGradient id="uo" cx="60%" cy="50%" r="70%"><stop offset="0" stop-color="#c45a1c"/><stop offset="1" stop-color="#3a1408"/></radialGradient>
+                <linearGradient id="ur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a0909"/><stop offset="1" stop-color="#8a1812"/></linearGradient>
+                <linearGradient id="uw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8f2216"/><stop offset="1" stop-color="#d4501f"/></linearGradient>
+            </defs>
+            <rect width="605" height="251" fill="#0a0506"/>
+            <circle cx="-12" cy="150" r="112" fill="url(#uo)"/>
+            <circle cx="-12" cy="150" r="124" fill="none" stroke="#b4501c" stroke-opacity=".35" stroke-width="3"/>
+            <path d="M200 0H605V251H300C345 205 300 120 250 80C225 56 205 30 200 0Z" fill="url(#ur)"/>
+            <path d="M330 251C385 190 470 178 605 128V251Z" fill="url(#uw)"/>
+        </svg>
+        <div class="u-brand"><img src="assets/img/uba-logo.png" alt="UBA"><small>United Bank for Africa</small></div>
+        <svg class="u-app" viewBox="90 55 630 680" aria-label="UBA app icon">
+            <defs>
+                <linearGradient id="ug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff2b2b"/><stop offset="1" stop-color="#c8000f"/></linearGradient>
+                <linearGradient id="uh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect x="100" y="65" width="610" height="655" rx="115" fill="url(#ug)"/>
+            <rect x="100" y="65" width="610" height="230" rx="115" fill="url(#uh)"/>
+            <path fill="#fff" d="M305 285L232 578H388L412 500Z"/>
+            <path fill="#fff" d="M388 235L558 212L498 515L420 425Z"/>
+        </svg>
+        <span class="u-word">Receipt</span>
     </div>
     <?php elseif ($r->bankId === 'gtrust'): ?>
-    <div class="g-head"><img src="assets/img/gtco-logo.png" alt="GTCO - Guaranty Trust Nigeria" height="64"></div>
+    <div class="gt-hd">
+        <i class="gt-b1"></i><i class="gt-b1n"></i><i class="gt-b2"></i><i class="gt-b2n"></i>
+        <div class="gt-logo">
+            <span class="gt-sq"><svg viewBox="0 0 10 10" aria-hidden="true"><rect x="5.6" y="1.4" width="3" height="3" fill="#fff"/></svg><b>GTBank</b></span>
+            <small>Guaranty Trust Bank plc</small><em>RC 152321</em>
+        </div>
+        <h3>Transaction Receipt</h3>
+        <hr>
+    </div>
     <?php elseif ($r->bankId === 'nombra'): ?>
     <div class="n-head">
         <img src="assets/img/nomba-logo.png" alt="nomba" height="18">
@@ -57,8 +89,12 @@ $words = function ($n) use (&$words) {
     </div>
     <?php elseif ($r->bankId === 'carbonite'): ?>
     <div class="c-head">
-        <img src="assets/img/carbon-header.png" alt="Carbon">
-        <span><?= $isDeposit ? 'Deposit' : 'Transfer' ?> Receipt</span>
+        <i class="c-b1"></i><i class="c-b2"></i>
+        <div class="c-logo">
+            <svg viewBox="70 70 440 500" aria-hidden="true"><path fill="#8c70d8" fill-rule="evenodd" d="M290 88L488 195L492 435L285 552L88 438L88 192Z M100 205L355 205L480 425L215 425Z"/><path fill="#2b1190" d="M300 94L470 192L356 197Z"/><path fill="#2b1190" d="M96 440L206 442L268 540Z"/></svg>
+            <img src="assets/img/carbon-logo.png" alt="carbon">
+        </div>
+        <span class="c-title"><?= $isDeposit ? 'Deposit' : 'Transfer' ?> Receipt</span>
     </div>
     <?php elseif ($r->bankId === 'sparkly'): ?>
     <div class="s-head">
@@ -84,7 +120,7 @@ $words = function ($n) use (&$words) {
     <div class="p-top">
         <strong><?= $r->amountFormatted() ?></strong>
         <span class="p-status">Successful Transaction</span>
-        <small><?= date('g:i A, M j, Y', $ts) ?></small>
+        <small><?= date('H:i, M j, Y', $ts) ?></small>
     </div>
     <?php else: ?>
     <header class="d-head">
@@ -158,56 +194,48 @@ $words = function ($n) use (&$words) {
         <div class="ac-row"><span class="k">Transaction Status</span><span class="v"><?= $isDeposit ? 'Deposit' : 'Transfer Request' ?> Successful</span></div>
     </div>
     <?php elseif ($r->bankId === 'zenor'): ?>
-    <div class="zn-bar"><?= date('l, F d, Y', $ts) ?></div>
-    <table class="zn-table">
-        <tr><th>Transfer Type:</th><td><?= $isDeposit ? 'Inward Deposit' : 'Domestic Transfer' ?></td></tr>
-        <tr><th>Transaction Date:</th><td><?= $e(strtolower(date('d-M-Y', $ts))) ?></td></tr>
-        <tr><th>Debit Account:</th><td><?= $e('xxxxxx' . substr($r->senderAccount, -4)) ?></td></tr>
-        <tr><th>Sender Name:</th><td><?= $e(strtoupper($r->senderName)) ?></td></tr>
-        <tr><th>Credit Account:</th><td><?= $e($r->recipientAccount) ?></td></tr>
-        <tr><th>Beneficiary Name:</th><td><?= $e(strtoupper($r->name)) ?></td></tr>
-        <tr><th>Bank:</th><td><?= $e(strtoupper($r->recipientBank)) ?></td></tr>
-        <tr><th>Status:</th><td>Completed</td></tr>
-        <tr><th>Amount:</th><td>NGN <?= number_format($r->amount, 2) ?></td></tr>
-        <tr><th>Fee:</th><td>NGN <?= number_format($r->fee, 2) ?></td></tr>
-        <tr><th>Description:</th><td><?= $e($r->description !== '' ? $r->description : '-') ?></td></tr>
-    </table>
-    <div class="zn-disc">
-        <b>DISCLAIMER:</b>
-        <p>Your transaction has been successfully processed. Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission error, incomplete information, fluctuations on the network/internet, interruptions, glitch delayed information or other matters beyond the Bank's control which may impact on the transaction and for which the Bank will not be liable. All transactions are subject to Zenith Bank confirmation and fraud proof of verification.</p>
+    <div class="zl">
+        <p><b>Transaction Type:</b> <?= $isDeposit ? 'Inward Deposit' : 'Local Transfer' ?></p>
+        <p><b>Transaction Date:</b> <?= date('d-M-Y h:i:s A', $ts) ?></p>
+        <p><b>Debit Account:</b> <?= $e(strtoupper($r->senderName) . '(' . substr($r->senderAccount, 0, 4) . '***' . substr($r->senderAccount, -3) . ')') ?></p>
+        <p><b>Credit Account:</b> <?= $e($r->recipientAccount) ?></p>
+        <p><b>Beneficiary:</b> <?= $e(strtoupper($r->name)) ?></p>
+        <p><b>Bank:</b> <?= $e($r->recipientBank) ?> Plc</p>
+        <p><b>Narration:</b> <?= $e($r->description !== '' ? $r->description : '-') ?></p>
+        <p><b>Status:</b> Success</p>
+        <p><b>Amount:</b> <?= $r->amountFormatted() ?></p>
+        <p><b>Fee:</b> <?= $r->feeFormatted() ?></p>
+    </div>
+    <div class="zl-disc">
+        <b>DISCLAIMER:</b> Your transaction has been successfully processed. Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors, incomplete information, fluctuations on the network/internet, interruptions, glitch, delayed information or other matters beyond the Bank's control which may impact on the transaction and for which the Bank will not be liable. All transactions are subject to Zenith Bank confirmation and fraud proof verification.
     </div>
     <?php elseif ($r->bankId === 'unity'): ?>
-    <div class="ub-card">
-        <h4>Transaction details</h4>
-        <div class="ub-row"><span class="k">Date</span><span class="v"><?= date('D M d Y', $ts) ?></span></div>
-        <div class="ub-row"><span class="k">Time</span><span class="v"><?= date('H:i:s', $ts) ?></span></div>
-        <div class="ub-row"><span class="k">Reference</span><span class="v"><?= $e($r->reference) ?></span></div>
-        <div class="ub-row"><span class="k">Amount</span><span class="v"><?= $r->amountFormatted() ?></span></div>
-        <div class="ub-row"><span class="k">Fee</span><span class="v"><?= $r->feeFormatted() ?></span></div>
-    </div>
-    <div class="ub-card">
-        <h4>Account details</h4>
-        <div class="ub-row"><span class="k">Sender name</span><span class="v"><?= $e($r->senderName) ?></span></div>
-        <div class="ub-row"><span class="k">Sender account number</span><span class="v"><?= $e('*********' . substr($r->senderAccount, -5)) ?></span></div>
-        <div class="ub-row"><span class="k">Receiver name</span><span class="v"><?= $e($r->name) ?></span></div>
-        <div class="ub-row"><span class="k">Receiver account number</span><span class="v"><?= $e($r->recipientAccount) ?></span></div>
-        <div class="ub-row"><span class="k">Receiver bank name</span><span class="v"><?= $e($r->recipientBank) ?></span></div>
-        <div class="ub-row"><span class="k">Narration</span><span class="v"><?= $e($r->description !== '' ? $r->description : '-') ?></span></div>
+    <div class="ut">
+        <div class="ut-head"><h3><?= $isDeposit ? 'Deposit' : 'Transfer' ?></h3><div><small><?= $isDeposit ? 'Deposit' : 'Transfer' ?> ID</small><b><?= $e(substr(preg_replace('/\D/', '', $r->reference), -8)) ?></b></div></div>
+        <div class="ut-row"><span class="k">Transaction date</span><span class="v"><?= date('d-M-Y', $ts) ?></span></div>
+        <div class="ut-row"><span class="k">Sender's Name</span><span class="v b"><?= $e(strtoupper($r->senderName)) ?></span></div>
+        <div class="ut-row"><span class="k">Source</span><span class="v b"><?= $e('xxxxxx' . substr($r->senderAccount, -4)) ?></span></div>
+        <div class="ut-row"><span class="k"><?= $isDeposit ? 'Depositor Name' : 'Destination Name' ?></span><span class="v b"><?= $e(strtoupper($r->name)) ?></span></div>
+        <div class="ut-row"><span class="k">Destination</span><span class="v b"><?= $e($r->recipientAccount) ?></span></div>
+        <div class="ut-row"><span class="k">Amount</span><span class="v b"><?= $r->amountFormatted() ?></span></div>
+        <div class="ut-row"><span class="k">Fee</span><span class="v b"><?= $r->feeFormatted() ?></span></div>
+        <div class="ut-row"><span class="k">Receiver&rsquo;s Bank</span><span class="v b"><?= $e($r->recipientBank) ?></span></div>
+        <div class="ut-row"><span class="k">Reason</span><span class="v b"><?= $e($r->description !== '' ? $r->description : '-') ?></span></div>
     </div>
     <?php elseif ($r->bankId === 'gtrust'): ?>
-    <div class="gt-title">Transaction Receipt</div>
     <div class="gt-body">
-        <p><span>Transaction Date:</span> <?= date('d M Y, H:i \G\M\T+1', $ts) ?></p>
-        <p><span>Reference Number:</span> <?= $e($r->reference) ?></p>
+        <i class="gtw-t"><b>GTBank</b></i><i class="gtw-m">Guaranty Trust Bank</i><i class="gtw-b"></i><i class="gtw-bn"></i>
+        <p><span>Transaction Date:</span> <?= $e(strtoupper(date('j M Y,g:iA', $ts))) ?> GMT+1</p>
+        <p><span>Reference Number:</span> Ref:<?= $e(substr(preg_replace('/\D/', '', $r->sessionId), 0, 21)) ?></p>
         <p><span>Sender:</span> <?= $e(strtoupper($r->senderName)) ?></p>
         <p><span>Transaction Amount:</span> <?= number_format($r->amount, $r->amount == floor($r->amount) ? 0 : 2) ?>NGN</p>
-        <p><span>Amount In Words:</span> <?= $e($words(floor($r->amount))) ?> Naira Only.</p>
-        <p><span>Transaction Type:</span> <?= $isDeposit ? 'GTB-Deposit' : 'GTB-ThirdParty Transfer' ?></p>
-        <p><span>Receiver:</span> <?= $e(strtoupper($r->name)) ?></p>
-        <p><span>Account Number:</span> <?= $e($r->recipientAccount) ?></p>
-        <p><span>Receiving Bank:</span> <?= $e(strtoupper($r->recipientBank)) ?></p>
-        <p><span>Fee:</span> <?= $r->feeFormatted() ?></p>
-        <p><span>Remarks:</span> <?= $r->description !== '' ? $e($r->description) . ' ' : '' ?>TRANSFER BETWEEN CUSTOMERS Via USSD GTBank Transfer <?= $e($r->sessionId) ?> from <?= $e(strtoupper($r->senderName)) ?> to <?= $e(strtoupper($r->name)) ?></p>
+        <p class="sm"><span>Amount In Words:</span> <?= $e(strtoupper($words(floor($r->amount)))) ?> NAIRA ONLY</p>
+        <p class="sm"><span>Transaction Type:</span> <?= $isDeposit ? 'DEPOSIT' : ($r->recipientBank === $r->bankName ? 'TO GTBANK (INSTANT)' : 'TO OTHER BANK (INSTANT)') ?></p>
+        <p class="sm"><span><?= $isDeposit ? 'Depositor' : 'Receiver' ?>:</span> <?= $e(strtoupper($r->name . '-' . $r->recipientAccount . '-' . $r->recipientBank)) ?></p>
+        <p><span>Account Number</span> <?= $e($r->recipientAccount) ?></p>
+        <p class="sm"><span>Receiving Bank:</span> <?= $e(strtoupper($r->recipientBank)) ?> PLC</p>
+        <p class="sm"><span>Fee:</span> <?= $e(strtoupper($r->feeFormatted())) ?></p>
+        <p class="sm"><span>Remarks:</span> SUCCESSFUL<?= $r->description !== '' ? ' - ' . $e(strtoupper($r->description)) : '' ?></p>
     </div>
     <?php elseif ($r->bankId === 'nombra'): ?>
     <h3 class="nb-title">PAYMENT DETAILS</h3>
@@ -225,16 +253,14 @@ $words = function ($n) use (&$words) {
     </div>
     <?php elseif ($r->bankId === 'carbonite'): ?>
     <div class="cb-rows">
-        <div class="cb-row"><span class="k">Amount</span><span class="v"><?= $r->amountFormatted() ?></span></div>
-        <div class="cb-row"><span class="k">Date &amp; time</span><span class="v"><?= date('M d, Y, h:i A', $ts) ?></span></div>
-        <div class="cb-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Beneficiary' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><small><?= $e($r->recipientAccount) ?> | <?= $e($r->recipientBank) ?></small></span></div>
+        <div class="cb-row"><span class="k">Amount</span><span class="v">&#8358;<?= number_format($r->amount, $r->amount == floor($r->amount) ? 0 : 2) ?></span></div>
+        <div class="cb-row"><span class="k">Date &amp; time</span><span class="v"><?= date('M d, Y \a\t h:i A', $ts) ?></span></div>
+        <div class="cb-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Beneficiary' ?></span><span class="v"><?= $e($r->name) ?><small><?= $e($r->recipientAccount) ?> | <?= $e($r->recipientBank) ?></small></span></div>
         <div class="cb-row"><span class="k">Sender</span><span class="v"><?= $e($r->senderName) ?></span></div>
-        <div class="cb-row"><span class="k">Transaction fee</span><span class="v"><?= $r->feeFormatted() ?></span></div>
-        <?php if ($r->description !== ''): ?>
-        <div class="cb-row"><span class="k">Description</span><span class="v"><?= $e($r->description) ?></span></div>
-        <?php endif; ?>
-        <div class="cb-row"><span class="k">Transaction ID</span><span class="v"><?= $e($r->reference) ?></span></div>
-        <div class="cb-row"><span class="k">Payment method</span><span class="v cb-pay"><span>Carbon<br>Account</span><img src="assets/img/carbon-icon.png" alt="" height="26"></span></div>
+        <div class="cb-row"><span class="k">Transaction fee</span><?php if ($r->fee > 0): ?><span class="v"><?= $r->feeFormatted() ?></span><?php else: ?><span class="v cb-free">FREE</span><?php endif; ?></div>
+        <div class="cb-row"><span class="k">Remark</span><span class="v"><?= $e($r->description !== '' ? $r->description : '-') ?></span></div>
+        <div class="cb-row"><span class="k">Transaction ID</span><span class="v"><?= $e(substr(preg_replace('/\D/', '', $r->sessionId), 0, 15)) ?></span></div>
+        <div class="cb-row"><span class="k">Payment method</span><span class="v cb-pay"><span>Carbon Account</span><i class="cb-ico"><svg viewBox="70 70 440 500" aria-hidden="true"><path fill="#8c70d8" fill-rule="evenodd" d="M290 88L488 195L492 435L285 552L88 438L88 192Z M100 205L355 205L480 425L215 425Z"/><path fill="#2b1190" d="M300 94L470 192L356 197Z"/><path fill="#2b1190" d="M96 440L206 442L268 540Z"/></svg></i></span></div>
     </div>
     <?php elseif ($r->bankId === 'sparkly'): ?>
     <div class="s-bar">Items</div>
@@ -260,23 +286,24 @@ $words = function ($n) use (&$words) {
         <div class="mp-item"><span class="k">Session ID</span><span class="v"><?= $e($r->sessionId) ?></span></div>
     </div>
     <?php elseif ($r->bankId === 'palmwave'): ?>
+    <?php $isMmo = in_array($r->recipientBank, ['Opay', 'Palmpay'], true); ?>
     <div class="pp-body">
         <div class="pp-party">
             <span class="k"><?= $isDeposit ? 'Depositor:' : 'Recipient:' ?></span>
-            <span class="v"><b><?= $e(strtoupper($r->name)) ?></b><small><?= $e($r->recipientBank) ?> | <?= $e($r->recipientAccount) ?></small></span>
+            <span class="v"><b><?= $e(strtoupper($r->name)) ?></b><small><?= $e($r->recipientBank) ?> | <?= $e($isMmo ? substr($r->recipientAccount, 0, 3) . ' ' . substr($r->recipientAccount, 3, 3) . ' ' . substr($r->recipientAccount, 6) : $r->recipientAccount) ?></small></span>
         </div>
         <div class="pp-party">
             <span class="k">Sender:</span>
-            <span class="v"><b><?= $e(strtoupper($r->senderName)) ?></b><small><?= $e($r->bankName) ?> | <?= $e(substr($r->senderAccount, 0, 3) . ' *** ' . substr($r->senderAccount, -4)) ?></small></span>
+            <span class="v"><b><?= $e(strtoupper($r->senderName)) ?></b><small><?= $e($r->bankName) ?> | <?= $e(substr($r->senderAccount, 0, 3) . ' **** ' . substr($r->senderAccount, -4)) ?></small></span>
         </div>
         <div class="pp-info">
             <h3>Transaction Info:</h3>
-            <div class="pp-row"><span class="k">Transaction Type</span><span class="v"><?= $isDeposit ? 'Deposit' : 'Money Transfer - Bank account' ?></span></div>
+            <div class="pp-row"><span class="k">Transaction Type</span><span class="v"><?= $isDeposit ? 'Deposit' : ($isMmo ? 'Money Transfer - MMO' : 'Money Transfer - Bank account') ?></span></div>
             <div class="pp-row"><span class="k">Fees</span><span class="v"><?= $r->feeFormatted() ?></span></div>
             <?php if ($r->description !== ''): ?>
             <div class="pp-row"><span class="k">Description</span><span class="v"><?= $e($r->description) ?></span></div>
             <?php endif; ?>
-            <div class="pp-row"><span class="k">Transaction ID</span><span class="v"><?= $e($r->reference) ?></span></div>
+            <div class="pp-row"><span class="k">Transaction ID</span><span class="v"><?= $e(substr(md5($r->reference), 0, 13)) ?></span></div>
             <div class="pp-row"><span class="k">Session ID</span><span class="v"><?= $e($r->sessionId) ?></span></div>
         </div>
     </div>
@@ -337,6 +364,11 @@ $words = function ($n) use (&$words) {
         <img src="assets/img/zenith-logo-white.png" alt="Zenith Bank" height="30">
     </div>
     <?php elseif ($r->bankId === 'unity'): ?>
+    <div class="uf">
+        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v.5l-10 6.5L2 6.5V6a1 1 0 0 1 1-1zm19 3.4V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.4l10 6.5 10-6.5z"/></svg>cfc@ubagroup.com</p>
+        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>(+234) 01-2808822, (+234) 01-6319822, 0700 225 5822</p>
+        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 9h-3a15.7 15.7 0 0 0-1.4-6A8 8 0 0 1 18.9 11zM12 4c.8 1 1.8 3.1 2 7h-4c.2-3.9 1.2-6 2-7zM9.5 5a15.7 15.7 0 0 0-1.4 6h-3A8 8 0 0 1 9.5 5zM5.1 13h3a15.7 15.7 0 0 0 1.4 6A8 8 0 0 1 5.1 13zM12 20c-.8-1-1.8-3.1-2-7h4c-.2 3.9-1.2 6-2 7zm2.5-1a15.700 15.700 0 0 0 1.4-6h3a8 8 0 0 1-4.4 6z"/></svg>www.ubagroup.com</p>
+    </div>
     <?php elseif ($r->bankId === 'gtrust'): ?>
     <div class="g-foot">
         <h4>DISCLAIMER</h4>
@@ -350,9 +382,10 @@ $words = function ($n) use (&$words) {
     </div>
     <?php elseif ($r->bankId === 'carbonite'): ?>
     <div class="c-foot">
+        <svg class="c-fold" viewBox="0 0 30 30" aria-hidden="true"><path fill="#c9b4f0" d="M0 0H20L30 10V22Z"/><path fill="#a888e3" d="M30 10V30L8 18Z"/></svg>
         <h4>Disclaimer:</h4>
         <p>Carbon has successfully processed this transaction but the completion of transfers are subject to transmission errors, network interruptions, glitches and other factors that are beyond Carbon's control and for which Carbon will not be liable. If any issues are experienced with your transaction, please generate a receipt from the list of recent transactions on your home page and contact customer support.</p>
-        <p class="c-legal">&copy;<?= date('Y') ?> Carbon is a financial service provided by Carbon Microfinance Bank (RC 1044655), licensed and regulated by the Central Bank of Nigeria (CBN).</p>
+        <p class="c-legal">&copy;<?= date('Y') ?> Carbon is a financial service provided by Carbon Finance &amp; Investments Limited (RC 1044655), licensed and regulated by the Central Bank of Nigeria (CBN).</p>
         <p class="c-addr">Registered address: <b>Plot 642C Akin Adesola St. Lagos 101233 Nigeria</b></p>
     </div>
     <?php elseif ($r->bankId === 'sparkly'): ?>
@@ -364,7 +397,9 @@ $words = function ($n) use (&$words) {
     </div>
     <img class="m-footer" src="assets/img/moniepoint-footer.png" alt="">
     <?php elseif ($r->bankId === 'palmwave'): ?>
-    <img class="d-footer-img" src="assets/img/palmpay-footer.png" alt="Enjoy seamless and unlimited free transfers to all banks. Enjoy all at PalmPay!">
+    <div class="pp-foot">
+        <p>90+ Free Bank Transfers Every Month!<br>Get cashbacks in Airtime &amp; data top-up!<br>Up to 150k Naira credit lines &amp; 16 days interest free!<br>Enjoy all at PalmPay!</p>
+    </div>
     <?php elseif ($r->bankId === 'opaylite'): ?>
     <img class="d-footer-img" src="assets/img/opay-footer.png" alt="Enjoy a better life with OPay">
     <?php elseif ($r->bankId === 'kudos'): ?>

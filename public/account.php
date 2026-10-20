@@ -37,7 +37,7 @@ $e = function ($s) { return htmlspecialchars((string)$s); };
 ?>
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>My account</title><link rel="stylesheet" href="assets/css/base.css"></head><body>
+<title>My account</title><link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(__DIR__ . '/assets/css/base.css') ?>"></head><body>
 <?php include __DIR__ . '/../templates/partials/nav.php'; ?>
 <main class="card">
     <h1>My account</h1>

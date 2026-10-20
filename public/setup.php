@@ -27,7 +27,7 @@ $title = 'First-time setup';
 ?>
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Setup</title><link rel="stylesheet" href="assets/css/base.css"></head><body>
+<title>Setup</title><link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(__DIR__ . '/assets/css/base.css') ?>"></head><body>
 <main class="card">
     <h1>Create super admin</h1>
     <p class="sub">One-time setup. This account can create, revoke and delete sub-admins. You can change its username and password later under My account.</p>

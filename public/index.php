@@ -16,7 +16,7 @@ if (($_GET['action'] ?? '') === 'name') {
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Receipt Design Practice</title>
-<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(__DIR__ . '/assets/css/base.css') ?>">
 </head><body>
 <?php include __DIR__ . '/../templates/partials/nav.php'; ?>
 <main class="card">
