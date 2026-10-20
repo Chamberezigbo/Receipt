@@ -1,0 +1,4 @@
+.DS_Store
+data/app.sqlite
+data/*.sqlite-*
+samples/
