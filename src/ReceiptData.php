@@ -35,6 +35,18 @@ final class ReceiptData
         return $s;
     }
 
+    // 30-digit NIBSS-style session id: institution code + yymmddHHmmss + 12 random digits.
+    private static function sessionId(int $ts, string $bankId): string
+    {
+        $codes = [
+            'ecobank' => '000010', 'accent' => '000014', 'gtrust' => '000013', 'zenor' => '000015',
+            'unity' => '000004', 'fidel' => '000007', 'firstline' => '000016', 'kudos' => '090267',
+            'opaylite' => '100004', 'palmwave' => '100033', 'moniepoint' => '090405',
+            'sparkly' => '090325', 'carbonite' => '100026', 'nombra' => '000001',
+        ];
+        return ($codes[$bankId] ?? '000001') . date('ymdHis', $ts) . self::digits(12);
+    }
+
     public static function fromRequest(array $in, array $banks): self
     {
         $bankId = isset($banks[$in['bank'] ?? '']) ? $in['bank'] : array_key_first($banks);
@@ -71,14 +83,14 @@ final class ReceiptData
             'name'             => mb_substr($name, 0, 60),
             'amount'           => max(0, (float)($in['amount'] ?? 0)),
             'date'             => date('Y-m-d H:i:s', $ts),
-            'reference'        => 'DEMO-' . random_int(10000000, 99999999),
+            'reference'        => date('ymd', $ts) . self::digits(10),
             'senderName'       => mb_substr($sender, 0, 60),
             'senderAccount'    => self::digits(10),
             'recipientAccount' => $account,
             'recipientBank'    => $recipientBank,
             'fee'              => max(0, (float)($in['fee'] ?? 10)),
             'description'      => mb_substr($desc, 0, 80),
-            'sessionId'        => 'DEMO' . self::digits(26),
+            'sessionId'        => self::sessionId($ts, $bankId),
         ]);
     }
 

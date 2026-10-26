@@ -9,7 +9,7 @@ if (Auth::user()) {
     header('Location: index.php');
     exit;
 }
-$err = '';
+$err = isset($_GET['expired']) ? 'Your session expired. Please log in again.' : '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Csrf::check();
     $err = Auth::login((string)($_POST['username'] ?? ''), (string)($_POST['password'] ?? ''));

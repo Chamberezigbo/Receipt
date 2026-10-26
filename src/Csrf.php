@@ -18,8 +18,10 @@ final class Csrf
     {
         $sent = (string)($_POST['csrf'] ?? '');
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !hash_equals(self::token(), $sent)) {
-            http_response_code(400);
-            exit('Invalid or missing security token. Go back, refresh and try again.');
+            // Expired / missing token (e.g. the session timed out): send them back to log in.
+            $base = strpos($_SERVER['SCRIPT_NAME'] ?? '', '/admin/') !== false ? '../' : '';
+            header('Location: ' . $base . 'login.php?expired=1');
+            exit;
         }
     }
 }

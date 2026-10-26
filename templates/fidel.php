@@ -1,4 +1,5 @@
 <?php /** @var ReceiptData $r */
+require_once __DIR__ . '/../src/helpers.php';
 $ts = strtotime($r->date) ?: time();
 $e = function ($s) { return htmlspecialchars((string)$s); };
 $isDeposit = $r->type === 'Deposit';
@@ -12,7 +13,7 @@ $mask = function ($acc) { return substr($acc, 0, 3) . '••••' . substr($a
     <header class="f-head f-head-logo">
         <div class="f-top">
             <span></span>
-            <img src="assets/img/fidelity-logo.png" alt="Fidelity Bank" height="34">
+            <img src="<?= asset('assets/img/fidelity-logo.png') ?>" alt="Fidelity Bank" height="34">
         </div>
     </header>
 
@@ -47,7 +48,7 @@ $mask = function ($acc) { return substr($acc, 0, 3) . '••••' . substr($a
         <h3>Online Banking</h3>
         <p class="fb-sub">Transaction Receipt</p>
         <div class="fb-row"><span class="k">Payer</span><span class="v"><?= $e(strtoupper($r->senderName)) ?><br><?= $e($mask($r->senderAccount)) ?><br><?= $e($r->bankName) ?> Plc.</span></div>
-        <div class="fb-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Receiver' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><br><?= $e($mask($r->recipientAccount)) ?><br><?= $e($r->recipientBank) ?> Plc.</span></div>
+        <div class="fb-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Receiver' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientAccount) ?><br><?= $e($r->recipientBank) ?> Plc.</span></div>
         <div class="fb-row"><span class="k">Transaction</span><span class="v">NGN <?= number_format($r->amount, $r->amount == floor($r->amount) ? 0 : 2) ?><br><?= $isDeposit ? 'DEPOSIT' : ($sameBank ? 'INTRATRANSFER' : 'INTERBANK TRANSFER') ?><br><?= date('j M Y, g:i a \G\M\T+1', $ts) ?></span></div>
         <div class="fb-row"><span class="k">Fee</span><span class="v">NGN <?= number_format($r->fee, 2) ?></span></div>
         <div class="fb-row"><span class="k">Narration</span><span class="v">ONB TRF TO <?= $e(strtoupper($r->name)) ?><?= $r->description !== '' ? ' ' . $e($r->description) : '' ?></span></div>
@@ -57,7 +58,7 @@ $mask = function ($acc) { return substr($acc, 0, 3) . '••••' . substr($a
             <p>This is an electronic receipt of a transaction and does not require any signature. The authenticity of transaction can be confirmed with the Bank.<br>For any other assistance, kindly call True Serve on 0700 3233 5489 or email true.serve@fidelitybank.ng</p>
         </div>
     </div>
-    <img class="f-ivy" src="assets/img/fidelity-ivy.png" alt="Bank with IVY on WhatsApp">
+    <img class="f-ivy" src="<?= asset('assets/img/fidelity-ivy.png') ?>" alt="Bank with IVY on WhatsApp">
 
     <?php include __DIR__ . '/partials/watermark.php'; ?>
 </div>

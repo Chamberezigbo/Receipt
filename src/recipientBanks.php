@@ -3,5 +3,5 @@
 return [
     'Access Bank', 'GTBank', 'First Bank of Nigeria', 'UBA', 'Zenith Bank', 'Fidelity Bank',
     'Opay', 'Palmpay', 'Moniepoint MFB', 'Kuda Bank', 'Wema Bank', 'Sterling Bank',
-    'Union Bank', 'Stanbic IBTC', 'FCMB', 'Polaris Bank', 'Keystone Bank', 'Ecobank',
+    'Union Bank', 'Stanbic IBTC', 'VFD Microfinance Bank', 'Sparkle', 'Carbon', 'FCMB', 'Polaris Bank', 'Keystone Bank', 'Ecobank',
 ];
