@@ -208,7 +208,9 @@ dt { color: var(--muted); padding-right: 12px; } dd { margin: 0; text-align: rig
 .cn-dispute { margin-top: 18px; padding: 15px 12px; border: 1px solid #272a3a; border-radius: 14px; text-align: center; font-size: 12px; color: #c9ccd8; }
 .cn-dispute b { color: #fff; font-weight: 700; }
 .receipt.spk { padding: 0 0 18px; background: #fff; border-radius: 16px; color: #1c1c1c; }
-.sp-hero { text-align: center; padding: 34px 16px 30px; background: #fff; border-radius: 0 0 14px 14px; box-shadow: 0 8px 10px -6px rgba(0,0,0,.2); }
+.sp-logo { padding: 22px 20px 0; text-align: center; background: #fff; border-radius: 16px 16px 0 0; }
+.sp-logo img { display: inline-block; width: auto; }
+.sp-hero { text-align: center; padding: 20px 16px 30px; background: #fff; border-radius: 0 0 14px 14px; box-shadow: 0 8px 10px -6px rgba(0,0,0,.2); }
 .sp-hero p { margin: 0 0 14px; font-size: 14px; color: #9a9da2; }
 .sp-av { display: grid; place-items: center; width: 60px; height: 60px; margin: 0 auto 18px; border-radius: 14px; background: #dff0c4; border: 1px solid #8fd32a; color: #7bd01a; font-size: 28px; font-weight: 800; }
 .sp-hero strong { display: block; color: #262626; }
@@ -445,3 +447,6 @@ button.primary.small { border-color: #4c6ef5; }
 .f-ivy { display: block; width: calc(100% - 24px); margin: 30px 12px 4px; }
 .receipt.fidel { background: #fff; }
 .f-legal { font-size: 8.5px; line-height: 1.5; color: #adb5bd; text-align: center; margin: 4px 20px 0; }
+
+/* Never let phones turn numbers into tappable links inside a receipt */
+.receipt a[href^="tel:"], .receipt a[href^="sms:"], .receipt a[href^="x-apple-data-detectors:"] { color: inherit !important; text-decoration: none !important; font: inherit !important; pointer-events: none; }

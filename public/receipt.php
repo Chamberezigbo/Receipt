@@ -14,7 +14,7 @@ header('Cache-Control: no-store');
 ?>
 <!doctype html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
 <title>Receipt <?= htmlspecialchars($r->reference) ?></title>
 <link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime(__DIR__ . '/assets/css/base.css') ?>">
 </head><body class="receipt-page">

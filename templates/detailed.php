@@ -123,6 +123,7 @@ $words = function ($n) use (&$words) {
     $spW = preg_split('/\s+/', trim($r->name));
     $spInit = strtoupper(mb_substr($spW[0] ?? '', 0, 1) . mb_substr($spW[count($spW) - 1] ?? '', 0, 1));
     ?>
+    <div class="sp-logo"><img src="<?= asset('assets/img/sparkle-logo.png') ?>" alt="Sparkle" height="26"></div>
     <div class="sp-hero">
         <?php if ($isDeposit): ?>
         <p><?= $e($r->senderName) ?> sent you</p>
@@ -164,7 +165,7 @@ $words = function ($n) use (&$words) {
         <small><?= date('M jS, Y H:i:s', $ts) ?></small>
     </div>
     <div class="o-rows">
-        <div class="o-row"><span class="k"><?= $isDeposit ? 'Depositor Details' : 'Recipient Details' ?></span><span class="v"><b><?= $e(strtoupper($r->name)) ?></b><span><?= $e($r->recipientBank) ?> | <?= $e($r->recipientAccount) ?></span></span></div>
+        <div class="o-row"><span class="k"><?= $isDeposit ? 'Recipient Details' : 'Recipient Details' ?></span><span class="v"><b><?= $e(strtoupper($r->name)) ?></b><span><?= $e($r->recipientBank) ?> | <?= $e($r->recipientAccount) ?></span></span></div>
         <div class="o-row"><span class="k">Sender Details</span><span class="v"><b><?= $e(strtoupper($r->senderName)) ?></b><span><?= $e($r->bankName) ?> | <?= $e(substr($r->senderAccount, 0, 3) . '****' . substr($r->senderAccount, -3)) ?></span></span></div>
         <div class="o-row"><span class="k">Transaction Type</span><span class="v"><?= $isDeposit ? 'Deposit' : 'Transfer to Bank Account' ?></span></div>
         <div class="o-row"><span class="k">Fees</span><span class="v"><?= $r->feeFormatted() ?></span></div>
@@ -179,7 +180,7 @@ $words = function ($n) use (&$words) {
     <div class="oz-rows">
         <p><span>Date/Time</span><b><?= date('d/m/Y H:i', $ts) ?></b></p>
         <p><span>Sender Details</span><b><?= $e($r->senderName) ?><br>OPay|<?= $e(substr($r->senderAccount, 0, 4) . '****' . substr($r->senderAccount, -2)) ?></b></p>
-        <p><span><?= $isDeposit ? 'Depositor Details' : 'Recipient Details' ?></span><b><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientBank) ?>|<?= $e($r->recipientAccount) ?></b></p>
+        <p><span><?= $isDeposit ? 'Recipient Details' : 'Recipient Details' ?></span><b><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientBank) ?>|<?= $e($r->recipientAccount) ?></b></p>
         <?php if ($r->description !== ''): ?>
         <p><span>Description</span><b><?= $e($r->description) ?></b></p>
         <?php endif; ?>
@@ -214,7 +215,7 @@ $words = function ($n) use (&$words) {
         <div class="eco2-sec eco2-dt"><span>Date <?= date('d M Y', $ts) ?></span><span>Time <?= date('g:i A', $ts) ?></span></div>
         <div class="eco2-sec eco2-sid"><b>Session<br>ID:</b><span><?= $e($r->sessionId) ?></span><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="#0a7fb5" stroke-width="2" d="M9 3h10a2 2 0 0 1 2 2v12H9zM5 7h4M5 7v14h12v-2"/></svg></div>
         <div class="eco2-sec"><small>Source Account</small><b><?= $e(strtoupper($r->senderName)) ?></b></div>
-        <div class="eco2-sec"><small><?= $isDeposit ? 'Depositor Details' : 'Beneficiary Details' ?></small><b><?= $e(strtoupper($r->name)) ?> (<?= $e($r->recipientAccount) ?>)</b><small class="eco2-bn">Bank Name: <?= $e($r->recipientBank) ?></small></div>
+        <div class="eco2-sec"><small><?= $isDeposit ? 'Recipient Details' : 'Beneficiary Details' ?></small><b><?= $e(strtoupper($r->name)) ?> (<?= $e($r->recipientAccount) ?>)</b><small class="eco2-bn">Bank Name: <?= $e($r->recipientBank) ?></small></div>
         <div class="eco2-sec eco2-amt">
             <p><span>Transaction Amount</span><b>NGN <?= number_format($r->amount, 2) ?></b></p>
             <p><span>Charges</span><b>NGN <?= number_format($r->fee, 2) ?></b></p>
@@ -227,7 +228,7 @@ $words = function ($n) use (&$words) {
     <div class="fk-rows">
         <div class="fk-row"><span class="k">From:</span><span class="v"><?= $e('*****' . substr($r->senderAccount, -5)) ?></span></div>
         <div class="fk-row"><span class="k">Sender Name:</span><span class="v"><?= $e(strtoupper($r->senderName)) ?></span></div>
-        <div class="fk-row"><span class="k"><?= $isDeposit ? 'Depositor Name:' : 'Beneficiary Name:' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?></span></div>
+        <div class="fk-row"><span class="k"><?= $isDeposit ? 'Recipient Name:' : 'Beneficiary Name:' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?></span></div>
         <div class="fk-row"><span class="k">Account No:</span><span class="v"><?= $e($r->recipientAccount) ?></span></div>
         <div class="fk-row"><span class="k">Bank:</span><span class="v"><?= $e(strtoupper($r->recipientBank)) ?></span></div>
         <div class="fk-row"><span class="k">Transaction Type:</span><span class="v"><?= $isDeposit ? 'Inward Deposit' : 'Interbank Transfer' ?></span></div>
@@ -243,7 +244,7 @@ $words = function ($n) use (&$words) {
         <div class="ac-row"><span class="k">Transaction Type</span><span class="v"><?= $isDeposit ? 'DEPOSIT' : 'INTER-BANK' ?></span></div>
         <div class="ac-row"><span class="k">Transaction Date</span><span class="v"><?= date('Y-m-d H:i:s', $ts) ?></span></div>
         <div class="ac-row"><span class="k">Sender</span><span class="v"><?= $e(strtoupper($r->senderName)) ?></span></div>
-        <div class="ac-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Beneficiary' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientAccount) ?><br><?= $e($r->recipientBank) ?></span></div>
+        <div class="ac-row"><span class="k"><?= $isDeposit ? 'Recipient' : 'Beneficiary' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientAccount) ?><br><?= $e($r->recipientBank) ?></span></div>
         <div class="ac-row"><span class="k">Fee</span><span class="v">N<?= number_format($r->fee, $r->fee == floor($r->fee) ? 0 : 2) ?></span></div>
         <?php if ($r->description !== ''): ?>
         <div class="ac-row"><span class="k">Remark</span><span class="v"><?= $e($r->description) ?></span></div>
@@ -279,7 +280,7 @@ $words = function ($n) use (&$words) {
         <div class="ut-row"><span class="k">Transaction date</span><span class="v"><?= date('d-M-Y', $ts) ?></span></div>
         <div class="ut-row"><span class="k">Sender's Name</span><span class="v b"><?= $e(strtoupper($r->senderName)) ?></span></div>
         <div class="ut-row"><span class="k">Source</span><span class="v b"><?= $e('xxxxxx' . substr($r->senderAccount, -4)) ?></span></div>
-        <div class="ut-row"><span class="k"><?= $isDeposit ? 'Depositor Name' : 'Destination Name' ?></span><span class="v b"><?= $e(strtoupper($r->name)) ?></span></div>
+        <div class="ut-row"><span class="k"><?= $isDeposit ? 'Recipient Name' : 'Destination Name' ?></span><span class="v b"><?= $e(strtoupper($r->name)) ?></span></div>
         <div class="ut-row"><span class="k">Destination</span><span class="v b"><?= $e($r->recipientAccount) ?></span></div>
         <div class="ut-row"><span class="k">Amount</span><span class="v b"><?= $r->amountFormatted() ?></span></div>
         <div class="ut-row"><span class="k">Fee</span><span class="v b"><?= $r->feeFormatted() ?></span></div>
@@ -300,7 +301,7 @@ $words = function ($n) use (&$words) {
         <p class="gz-ok"><?= $isDeposit ? 'Deposit successful' : 'Success' ?></p>
         <dl>
             <dt>Sender</dt><dd><?= $e($r->senderName) ?></dd>
-            <dt><?= $isDeposit ? 'Depositor' : 'Receiver' ?></dt><dd><?= $e($gtReceiver) ?></dd>
+            <dt><?= $isDeposit ? 'Recipient' : 'Receiver' ?></dt><dd><?= $e($gtReceiver) ?></dd>
             <dt>Account number</dt><dd><?= $e($r->recipientAccount) ?></dd>
             <dt>Receiving bank</dt><dd><?= $e($r->recipientBank) ?></dd>
             <dt>Reference number</dt><dd><?= $e($gtRef) ?></dd>
@@ -312,7 +313,7 @@ $words = function ($n) use (&$words) {
     <div class="nb-card">
         <div class="nb-row"><span class="k">Status</span><span class="v nb-ok">Successful</span></div>
         <div class="nb-row"><span class="k">Type</span><span class="v"><?= $isDeposit ? 'Deposit' : 'Transfer' ?></span></div>
-        <div class="nb-row"><span class="k"><?= $isDeposit ? 'Depositor' : 'Beneficiary' ?></span><span class="v"><?= $e($r->name) ?><small><?= $e($r->recipientAccount) ?> | <?= $e($r->recipientBank) ?></small></span></div>
+        <div class="nb-row"><span class="k"><?= $isDeposit ? 'Recipient' : 'Beneficiary' ?></span><span class="v"><?= $e($r->name) ?><small><?= $e($r->recipientAccount) ?> | <?= $e($r->recipientBank) ?></small></span></div>
         <div class="nb-row"><span class="k">Sender</span><span class="v"><?= $e($r->senderName) ?><small><?= $e($r->senderAccount) ?></small></span></div>
         <div class="nb-row"><span class="k">Fee</span><span class="v"><?= $r->feeFormatted() ?></span></div>
         <?php if ($r->description !== ''): ?>
@@ -353,9 +354,9 @@ $words = function ($n) use (&$words) {
         <div class="mp-item"><span class="k">Transaction Type</span><span class="mp-chip"><?= $isDeposit ? 'Deposit' : 'Transfer' ?></span></div>
         <div class="mp-item"><span class="k">Sender Name</span><span class="v"><?= $e($r->senderName) ?></span></div>
         <div class="mp-item"><span class="k">Source Institution</span><span class="v"><?= $e($r->bankName) ?></span></div>
-        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Depositor' : 'Beneficiary' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?></span></div>
-        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Depositor Account' : 'Beneficiary Account' ?></span><span class="v"><?= $e($r->recipientAccount) ?></span></div>
-        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Depositor Institution' : 'Beneficiary Institution' ?></span><span class="v"><?= $e($r->recipientBank) ?></span></div>
+        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Recipient' : 'Beneficiary' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?></span></div>
+        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Recipient Account' : 'Beneficiary Account' ?></span><span class="v"><?= $e($r->recipientAccount) ?></span></div>
+        <div class="mp-item"><span class="k"><?= $isDeposit ? 'Recipient Institution' : 'Beneficiary Institution' ?></span><span class="v"><?= $e($r->recipientBank) ?></span></div>
         <div class="mp-item"><span class="k">Fee</span><span class="v"><?= $r->feeFormatted() ?></span></div>
         <?php if ($r->description !== ''): ?>
         <div class="mp-item"><span class="k">Description</span><span class="v"><?= $e($r->description) ?></span></div>
@@ -368,7 +369,7 @@ $words = function ($n) use (&$words) {
     <?php $isMmo = in_array($r->recipientBank, ['Opay', 'Palmpay'], true); ?>
     <div class="pp-body">
         <div class="pp-party">
-            <span class="k"><?= $isDeposit ? 'Depositor:' : 'Recipient:' ?></span>
+            <span class="k"><?= $isDeposit ? 'Recipient:' : 'Recipient:' ?></span>
             <span class="v"><b><?= $e(strtoupper($r->name)) ?></b><small><?= $e($r->recipientBank) ?> | <?= $e($isMmo ? substr($r->recipientAccount, 0, 3) . ' ' . substr($r->recipientAccount, 3, 3) . ' ' . substr($r->recipientAccount, 6) : $r->recipientAccount) ?></small></span>
         </div>
         <div class="pp-party">
@@ -395,7 +396,7 @@ $words = function ($n) use (&$words) {
     <?php endif; ?>
 
     <div class="d-row">
-        <span class="k"><?= $isDeposit ? 'Depositor Details' : 'Beneficiary Details' ?></span>
+        <span class="k"><?= $isDeposit ? 'Recipient Details' : 'Beneficiary Details' ?></span>
         <span class="v"><b><?= $e($r->name) ?></b><small><?= $e($r->recipientBank) ?> | <?= $e($r->recipientAccount) ?></small></span>
     </div>
     <div class="d-row">
