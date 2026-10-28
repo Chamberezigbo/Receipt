@@ -47,6 +47,12 @@ final class ReceiptData
         return ($codes[$bankId] ?? '000001') . date('ymdHis', $ts) . self::digits(12);
     }
 
+    // 10-digit account -> 702***5262 (first 3, three stars, last 4). Shown this way on every receipt.
+    public static function maskAccount(string $acc): string
+    {
+        return strlen($acc) >= 7 ? substr($acc, 0, 3) . '***' . substr($acc, -4) : $acc;
+    }
+
     public static function fromRequest(array $in, array $banks): self
     {
         $bankId = isset($banks[$in['bank'] ?? '']) ? $in['bank'] : array_key_first($banks);
@@ -85,8 +91,8 @@ final class ReceiptData
             'date'             => date('Y-m-d H:i:s', $ts),
             'reference'        => date('ymd', $ts) . self::digits(10),
             'senderName'       => mb_substr($sender, 0, 60),
-            'senderAccount'    => self::digits(10),
-            'recipientAccount' => $account,
+            'senderAccount'    => self::maskAccount(self::digits(10)),
+            'recipientAccount' => self::maskAccount($account),
             'recipientBank'    => $recipientBank,
             'fee'              => max(0, (float)($in['fee'] ?? 10)),
             'description'      => mb_substr($desc, 0, 80),

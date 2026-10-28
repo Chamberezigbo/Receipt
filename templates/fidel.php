@@ -7,7 +7,6 @@ $initials = function ($n) {
     $p = preg_split('/\s+/', trim($n));
     return mb_strtoupper(mb_substr($p[0] ?? '', 0, 1) . mb_substr($p[1] ?? '', 0, 1));
 };
-$mask = function ($acc) { return substr($acc, 0, 3) . '••••' . substr($acc, -3); };
 ?>
 <div class="receipt fidel" style="--brand: <?= $e($r->color) ?>">
     <header class="f-head f-head-logo">
@@ -47,7 +46,7 @@ $mask = function ($acc) { return substr($acc, 0, 3) . '••••' . substr($a
     <div class="fb">
         <h3>Online Banking</h3>
         <p class="fb-sub">Transaction Receipt</p>
-        <div class="fb-row"><span class="k">Payer</span><span class="v"><?= $e(strtoupper($r->senderName)) ?><br><?= $e($mask($r->senderAccount)) ?><br><?= $e($r->bankName) ?> Plc.</span></div>
+        <div class="fb-row"><span class="k">Payer</span><span class="v"><?= $e(strtoupper($r->senderName)) ?><br><?= $e($r->senderAccount) ?><br><?= $e($r->bankName) ?> Plc.</span></div>
         <div class="fb-row"><span class="k"><?= $isDeposit ? 'Recipient' : 'Receiver' ?></span><span class="v"><?= $e(strtoupper($r->name)) ?><br><?= $e($r->recipientAccount) ?><br><?= $e($r->recipientBank) ?> Plc.</span></div>
         <div class="fb-row"><span class="k">Transaction</span><span class="v">NGN <?= number_format($r->amount, $r->amount == floor($r->amount) ? 0 : 2) ?><br><?= $isDeposit ? 'DEPOSIT' : ($sameBank ? 'INTRATRANSFER' : 'INTERBANK TRANSFER') ?><br><?= date('j M Y, g:i a \G\M\T+1', $ts) ?></span></div>
         <div class="fb-row"><span class="k">Fee</span><span class="v">NGN <?= number_format($r->fee, 2) ?></span></div>
